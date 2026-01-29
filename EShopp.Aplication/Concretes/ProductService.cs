@@ -45,4 +45,8 @@ public class ProductService : IProductService
         _unitOfWork.Products.Update(category);
         await _unitOfWork.SaveChangesAsync();
     }
+    public async Task AddToCart(int id)
+    {
+        Console.WriteLine("Product added to cart.");//--------------------Change
+    }
 }

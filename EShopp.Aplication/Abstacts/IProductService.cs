@@ -10,5 +10,5 @@ public interface IProductService
     Task<IEnumerable<Product>> GetAllProductAsync();
     Task<Product> GetProductByIdAsync(int id);
     Task<IEnumerable<Product>> GetAllWithCategoryAsync();
-
+    Task AddToCart(int id);
 }
