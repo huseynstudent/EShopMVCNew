@@ -9,7 +9,7 @@
             <th>Name</th>
             <th>Price</th>
             <th>Category name</th>
-            <th style="width: 80px;">Actions</th>
+            <th style="width: 120px;">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -19,20 +19,23 @@
                 <td class="text-center">@product.Id</td>
                 <td>@product.Name</td>
                 <td>@product.Price</td>
-                <td>@product.Category.Name</td>
+                <td>@product.Category?.Name</td>
                 <td class="text-center">
+                    <form asp-controller="Product"
+                          asp-action="AddToCart"
+                          asp-route-id="@product.Id"
+                          method="post"
+                          style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-success me-1">＋</button>
+                    </form>
+
                     <form asp-controller="Product"
                           asp-action="DeleteProduct"
                           asp-route-id="@product.Id"
                           method="post"
                           style="display:inline;"
                           onsubmit="return confirm('Bu kategoriyi silmək istədiyinizə əminsiniz?');">
-
-                        @Html.AntiForgeryToken()
-
-                        <button type="submit" class="btn btn-sm btn-danger">
-                            🗑️
-                        </button>
+                        <button type="submit" class="btn btn-sm btn-danger">🗑️</button>
                     </form>
                 </td>
             </tr>

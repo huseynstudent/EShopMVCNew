@@ -1,8 +1,12 @@
-﻿
-namespace EShopp.Domain.Entities;
+﻿namespace EShopp.Domain.Entities;
 
-class Order : BaseEntity
+public class Order : BaseEntity
 {
-    List<Product> Products { get; set; }
-    int TotalAmount { get; set; } = 0;
+    // Foreign key
+    public int ProductId { get; set; }
+
+    // Navigation property
+    public Product Product { get; set; }
+    public int Quantity { get; set; } = 1;
+
 }

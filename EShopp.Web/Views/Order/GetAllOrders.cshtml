@@ -1,0 +1,43 @@
+﻿@model List<Order>
+
+<h2>My Cart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.Product?.Name</td>
+                <td>@order.Product?.Price</td>
+                <td>@order.Product?.Category?.Name</td>
+                <td>@order.Quantity</td>
+                <td>@((order.Product?.Price ?? 0) * order.Quantity)</td>
+                <td>
+                    <form asp-controller="Order" asp-action="DecreaseQuantity" asp-route-id="@order.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-secondary" style="background-color:orange" >－</button>
+                    </form>
+
+                    <form asp-controller="Order" asp-action="IncreaseQuantity" asp-route-id="@order.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-secondary" style="background-color:forestgreen">＋</button>
+                    </form>
+
+                    <form asp-controller="Order" asp-action="RemoveFromCart" asp-route-id="@order.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">🗑️</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

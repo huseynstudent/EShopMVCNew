@@ -1,5 +1,10 @@
-﻿namespace EShopp.DAL.Respositories.Abstacts;
+﻿using EShopp.Domain.Entities;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
-public interface IOrderRepository:IGenericRepository<Order>
+namespace EShopp.DAL.Respositories.Abstacts;
+
+public interface IOrderRepository : IGenericRepository<Order>
 {
+    Task<IEnumerable<Order>> GetAllWithProductAsync();
 }

@@ -32,22 +32,32 @@ namespace EShopp.Web.Controllers
 
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateProduct(Product product)
         {
             await _productService.AddProduct(product);
             return RedirectToAction("CreateProduct", "Product");
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
             var products = await _productService.GetAllWithCategoryAsync();
             return View(products);
         }
+
         [HttpPost]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             await _productService.RemoveProduct(id);
+            return RedirectToAction("GetAllProducts");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(int id)
+        {
+            await _productService.AddToCart(id);
             return RedirectToAction("GetAllProducts");
         }
     }

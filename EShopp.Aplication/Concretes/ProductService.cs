@@ -1,4 +1,5 @@
-﻿using EShopp.Aplication.Abstacts;
+﻿using System.Linq;
+using EShopp.Aplication.Abstacts;
 using EShopp.DAL.UnitOfWork;
 using EShopp.Domain.Entities;
 
@@ -45,8 +46,28 @@ public class ProductService : IProductService
         _unitOfWork.Products.Update(category);
         await _unitOfWork.SaveChangesAsync();
     }
+
     public async Task AddToCart(int id)
     {
-        Console.WriteLine("Product added to cart.");//--------------------Change
+        // If an order (cart line) for this product already exists, increment quantity.
+        // Otherwise add a new order line with Quantity = 1.
+        var orders = await _unitOfWork.Orders.GetAllAsync();
+        var existing = orders.FirstOrDefault(o => o.ProductId == id);
+        if (existing != null)
+        {
+            existing.Quantity++;
+            _unitOfWork.Orders.Update(existing);
+        }
+        else
+        {
+            var order = new Order
+            {
+                ProductId = id,
+                Quantity = 1
+            };
+            await _unitOfWork.Orders.AddAsync(order);
+        }
+
+        await _unitOfWork.SaveChangesAsync();
     }
 }
