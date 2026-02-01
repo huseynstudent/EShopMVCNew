@@ -1,11 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EShopp.Aplication.Abstacts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EShopp.Web.Controllers;
 
 public class SaleController : Controller
 {
-    public IActionResult Index()
+    private readonly ISaleService _saleService;
+
+    public SaleController(ISaleService saleService)
     {
-        return View();
+        _saleService = saleService;
+    }
+    [HttpPost]
+    public async Task<IActionResult> Buy(int id )
+    {
+        await _saleService.BuyAsync(id);
+        return RedirectToAction("GetAllOrders");
     }
 }

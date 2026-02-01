@@ -36,6 +36,10 @@
                     <form asp-controller="Order" asp-action="RemoveFromCart" asp-route-id="@order.Id" method="post" style="display:inline;">
                         <button type="submit" class="btn btn-sm btn-danger">🗑️</button>
                     </form>
+                    <form asp-controller="Sale" asp-action="Buy" asp-route-id="@order.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">Buy</button>
+                    </form>
+
                 </td>
             </tr>
         }
