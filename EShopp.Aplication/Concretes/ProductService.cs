@@ -2,17 +2,19 @@
 using EShopp.Aplication.Abstacts;
 using EShopp.DAL.UnitOfWork;
 using EShopp.Domain.Entities;
-
 namespace EShopp.Aplication.Concretes;
 
 public class ProductService : IProductService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IOrderService _orderService;
 
-    public ProductService(IUnitOfWork unitOfWork)
+    public ProductService(IUnitOfWork unitOfWork, IOrderService orderService)
     {
         _unitOfWork = unitOfWork;
+        _orderService = orderService;
     }
+
 
     public async Task AddProduct(Product product)
     {
@@ -49,14 +51,13 @@ public class ProductService : IProductService
 
     public async Task AddToCart(int id)
     {
-        // If an order (cart line) for this product already exists, increment quantity.
-        // Otherwise add a new order line with Quantity = 1.
         var orders = await _unitOfWork.Orders.GetAllAsync();
         var existing = orders.FirstOrDefault(o => o.ProductId == id);
         if (existing != null)
         {
-            existing.Quantity++;
-            _unitOfWork.Orders.Update(existing);
+            //existing.Quantity++;
+            //_unitOfWork.Orders.Update(existing);
+            await _orderService.IncreaseQuantityAsync(existing.Id);
         }
         else
         {

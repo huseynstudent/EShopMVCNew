@@ -27,9 +27,13 @@ public class OrderService : IOrderService
     public async Task IncreaseQuantityAsync(int id)
     {
         var order = await _unitOfWork.Orders.GetByIdAsync(id);
-        if (order != null)
+        var product = await _unitOfWork.Products.GetByIdAsync(order.ProductId);
+        if (order != null && product != null)
         {
-            order.Quantity++;
+            if (order.Quantity != product.Stock)
+            {
+                order.Quantity++;
+            }
             _unitOfWork.Orders.Update(order);
             await _unitOfWork.SaveChangesAsync();
         }

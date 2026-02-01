@@ -8,4 +8,5 @@ public class Product:BaseEntity
     public int CategoryId { get; set; }
     //Navigation Property
     public Category Category { get; set; }
+    public int Stock { get; set; }
 }
