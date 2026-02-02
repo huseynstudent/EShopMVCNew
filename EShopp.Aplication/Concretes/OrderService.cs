@@ -30,7 +30,7 @@ public class OrderService : IOrderService
         var product = await _unitOfWork.Products.GetByIdAsync(order.ProductId);
         if (order != null && product != null)
         {
-            if (order.Quantity != product.Stock)
+            if (order.Quantity < product.Stock)
             {
                 order.Quantity++;
             }

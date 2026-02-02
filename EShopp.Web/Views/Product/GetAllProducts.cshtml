@@ -20,7 +20,7 @@
                 <td class="text-center">@product.Id</td>
                 <td>@product.Name</td>
                 <td>@product.Price</td>
-                <td>@product.Stock?@product.Stock:"Out of Stock"</td>
+                <td>@(product.Stock > 0 ? product.Stock.ToString() : "Out of Stock")</td>
                 <td>@product.Category?.Name</td>
                 <td class="text-center">
                     <form asp-controller="Product"

@@ -11,10 +11,11 @@ public class SaleController : Controller
     {
         _saleService = saleService;
     }
+
     [HttpPost]
-    public async Task<IActionResult> Buy(int id )
+    public async Task<IActionResult> Buy(int id)
     {
         await _saleService.BuyAsync(id);
-        return RedirectToAction("GetAllOrders");
+        return RedirectToAction("GetAllOrders", "Order");
     }
 }

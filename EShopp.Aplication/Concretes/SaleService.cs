@@ -1,6 +1,5 @@
 ﻿using EShopp.Aplication.Abstacts;
 using EShopp.DAL.UnitOfWork;
-using EShopp.Domain.Entities;
 
 namespace EShopp.Aplication.Concretes;
 
@@ -12,11 +11,25 @@ public class SaleService : ISaleService
     {
         _unitOfWork = unitOfWork;
     }
-    public async Task BuyAsync(int id)
+
+    public async Task<bool> BuyAsync(int orderId)
     {
-        var order = await _unitOfWork.Orders.GetByIdAsync(id);
-        var product = 5;////-----------------------------finish
-        _unitOfWork.Orders.Update(order);
+        var order = await _unitOfWork.Orders.GetByIdAsync(orderId);
+        if (order is null)
+        {
+            return false;
+        }
+
+        var product = await _unitOfWork.Products.GetByIdAsync(order.ProductId);
+        if (product != null)
+        {
+            product.Stock -= order.Quantity;
+            _unitOfWork.Products.Update(product);
+        }
+
+        _unitOfWork.Orders.Delete(orderId);
+
         await _unitOfWork.SaveChangesAsync();
+        return true;
     }
 }

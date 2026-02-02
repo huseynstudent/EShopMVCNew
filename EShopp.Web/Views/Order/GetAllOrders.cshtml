@@ -22,7 +22,7 @@
                 <td>@order.Product?.Name</td>
                 <td>@order.Product?.Price</td>
                 <td>@order.Product?.Category?.Name</td>
-                <td>@order.Quantity</td>
+                <td>@(order.Quantity > 0 ? order.Quantity.ToString() : "Out of Stock")</td>
                 <td>@((order.Product?.Price ?? 0) * order.Quantity)</td>
                 <td>
                     <form asp-controller="Order" asp-action="DecreaseQuantity" asp-route-id="@order.Id" method="post" style="display:inline;">
@@ -36,10 +36,10 @@
                     <form asp-controller="Order" asp-action="RemoveFromCart" asp-route-id="@order.Id" method="post" style="display:inline;">
                         <button type="submit" class="btn btn-sm btn-danger">🗑️</button>
                     </form>
-                    <form asp-controller="Sale" asp-action="Buy" asp-route-id="@order.Id" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-sm btn-danger">Buy</button>
-                    </form>
 
+                    <form asp-controller="Sale" asp-action="Buy" asp-route-id="@order.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-primary">Buy</button>
+                    </form>
                 </td>
             </tr>
         }

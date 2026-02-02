@@ -64,7 +64,7 @@ public class ProductService : IProductService
             var order = new Order
             {
                 ProductId = id,
-                Quantity = 1
+                Quantity = 0
             };
             await _unitOfWork.Orders.AddAsync(order);
         }

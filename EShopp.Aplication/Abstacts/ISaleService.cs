@@ -2,5 +2,5 @@
 
 public interface ISaleService
 {
-    Task BuyAsync(int id);
+    Task<bool> BuyAsync(int id);
 }
