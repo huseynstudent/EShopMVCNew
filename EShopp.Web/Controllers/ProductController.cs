@@ -60,5 +60,10 @@ namespace EShopp.Web.Controllers
             await _productService.AddToCart(id);
             return RedirectToAction("GetAllProducts");
         }
+        public async Task<IActionResult> AddStock(int id)
+        {
+            await _productService.AddStock(id);
+            return RedirectToAction("GetAllProducts");
+        }
     }
 }

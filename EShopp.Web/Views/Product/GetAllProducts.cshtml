@@ -10,7 +10,7 @@
             <th>Price</th>
             <th> In Stock</th>
             <th>Category name</th>
-            <th style="width: 120px;">Actions</th>
+            <th style="width: 140px;">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +28,14 @@
                           asp-route-id="@product.Id"
                           method="post"
                           style="display:inline;">
-                        <button type="submit" class="btn btn-sm btn-success me-1">＋</button>
+                        <button type="submit" class="btn btn-sm btn-success me-1">🛒</button>
+                    </form>
+                    <form asp-controller="Product"
+                          asp-action="AddStock"
+                          asp-route-id="@product.Id"
+                          method="post"
+                          style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-success me-1">+</button>
                     </form>
 
                     <form asp-controller="Product"

@@ -71,4 +71,14 @@ public class ProductService : IProductService
 
         await _unitOfWork.SaveChangesAsync();
     }
+    public async Task AddStock(int id)
+    {
+        var product = await _unitOfWork.Products.GetByIdAsync(id);
+        if (product != null)
+        {
+            product.Stock += 1;
+            _unitOfWork.Products.Update(product);
+            await _unitOfWork.SaveChangesAsync();
+        }
+    }
 }

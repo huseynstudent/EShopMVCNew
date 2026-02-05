@@ -22,7 +22,7 @@
                 <td>@order.Product?.Name</td>
                 <td>@order.Product?.Price</td>
                 <td>@order.Product?.Category?.Name</td>
-                <td>@(order.Quantity > 0 ? order.Quantity.ToString() : "Out of Stock")</td>
+                <td>@(order.Quantity > 0 ? order.Quantity.ToString() : "Not in Stock")</td>
                 <td>@((order.Product?.Price ?? 0) * order.Quantity)</td>
                 <td>
                     <form asp-controller="Order" asp-action="DecreaseQuantity" asp-route-id="@order.Id" method="post" style="display:inline;">
