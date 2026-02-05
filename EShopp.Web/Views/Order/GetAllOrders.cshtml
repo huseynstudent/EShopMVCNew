@@ -1,6 +1,6 @@
 ﻿@model List<Order>
 
-<h2>My Cart</h2>
+<h2>My Cart</h2> 
 
 <table class="table">
     <thead>
@@ -22,7 +22,7 @@
                 <td>@order.Product?.Name</td>
                 <td>@order.Product?.Price</td>
                 <td>@order.Product?.Category?.Name</td>
-                <td>@(order.Quantity > 0 ? order.Quantity.ToString() : "Not in Stock")</td>
+                <td>@(order.Quantity > 0 ? order.Quantity.ToString() : "Not in Cart")</td>
                 <td>@((order.Product?.Price ?? 0) * order.Quantity)</td>
                 <td>
                     <form asp-controller="Order" asp-action="DecreaseQuantity" asp-route-id="@order.Id" method="post" style="display:inline;">

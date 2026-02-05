@@ -1,4 +1,4 @@
-namespace EShopp.Web.Models
+namespace AspnetMvcAuth.Models
 {
     public class ErrorViewModel
     {

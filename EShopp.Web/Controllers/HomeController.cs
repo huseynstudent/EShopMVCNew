@@ -1,9 +1,10 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using EShopp.Web.Models;
+using AspnetMvcAuth.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace EShopp.Web.Controllers;
-
+namespace AspnetMvcAuth.Controllers;
+[Authorize]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -17,7 +18,7 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    [AllowAnonymous]
     public IActionResult Privacy()
     {
         return View();
